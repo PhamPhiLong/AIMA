@@ -41,7 +41,7 @@ static int queue_get_front(const void* instance, void **element, unsigned int* e
 static int queue_dequeue(void* instance, void **element, unsigned int* element_size);
 static void* create_priority_queue(Comparable comparable);
 static int priority_queue_enqueue(void* instance, void *element, unsigned int element_size);
-static Node* get_node_at_position(LinkedList *lnk_list, unsigned int position);
+static Node* get_node_at_position(const LinkedList *lnk_list, unsigned int position);
 static void* copy_memory(void *destination, const void *source, unsigned int size);
 
 /** GLOBAL VARIABLES *********************************************************/
@@ -142,12 +142,12 @@ static void* create_linked_list(void)
 
 static void* clone_linked_list(const void* instance)
 {
-    LinkedList    *lnk_list = (LinkedList*)instance;
-    LinkedList    *cloned_lnk_list;
-    Node          *node;
-	Node          *next_node;
-    Node          **p_cloned_node;
-    unsigned int  i;
+    const LinkedList  *lnk_list = (const LinkedList*)instance;
+    LinkedList    	 *cloned_lnk_list;
+    Node             *node;
+	Node             *next_node;
+    Node             **p_cloned_node;
+    unsigned int     i;
     
     /* Check input parameters */
     if (!lnk_list) {        
@@ -155,7 +155,7 @@ static void* clone_linked_list(const void* instance)
     } 
     
 	/* Create a new LinkedList */
-    cloned_lnk_list = malloc(sizeof(*clone_linked_list));
+    cloned_lnk_list = malloc(sizeof(*cloned_lnk_list));
     if (!lnk_list) {
         goto LbErr;
     } else {
@@ -222,7 +222,7 @@ LbSuccess:
 
 static char is_empty(const void* instance)
 {
-    LinkedList    *lnk_list = (LinkedList*)instance;
+    const LinkedList    *lnk_list = (const LinkedList*)instance;
     
     /* Check input parameters */
     if (!lnk_list) {
@@ -234,7 +234,7 @@ static char is_empty(const void* instance)
 
 static int get_size(const void* instance)
 {
-    LinkedList    *lnk_list = (LinkedList*)instance;
+    const LinkedList    *lnk_list = (const LinkedList*)instance;
     
     /* Check input parameters */
     if (!lnk_list) {
@@ -246,8 +246,8 @@ static int get_size(const void* instance)
 
 static int get(const void* instance, unsigned int position, void **element, unsigned int* element_size)
 {
-    LinkedList    *lnk_list = (LinkedList*)instance;
-    Node          *node;
+    const LinkedList    *lnk_list = (const LinkedList*)instance;
+    Node                *node;
     
     /* Check input parameters */
     if (!instance || (position > lnk_list->node_number - 1) || !element || !element_size) {
@@ -372,7 +372,7 @@ static int remove(void* instance, unsigned int position)
 
 static int delete_linked_list(void** instance)
 {
-    LinkedList    *lnk_list;;
+    LinkedList    *lnk_list;
     Node          *node;
     Node          *next_node;
     unsigned int  i;
@@ -412,7 +412,7 @@ static int stack_push(void* instance, void *element, unsigned int element_size)
 
 static int stack_peek(const void* instance, void **element, unsigned int* element_size)
 {
-    LinkedList *lnk_list = (LinkedList*)instance;
+    const LinkedList *lnk_list = (const LinkedList*)instance;
         
     /* Check input parameters */
     if (!lnk_list) {
@@ -485,7 +485,7 @@ static int priority_queue_enqueue(void* instance, void *element, unsigned int el
     return add(instance, queue_size, element, element_size);
 }
 
-static Node* get_node_at_position(LinkedList *lnk_list, unsigned int position)
+static Node* get_node_at_position(const LinkedList *lnk_list, unsigned int position)
 {
     unsigned int i;
     
