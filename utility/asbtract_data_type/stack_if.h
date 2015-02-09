@@ -68,7 +68,7 @@
      * @return         0: success
      *                -1: error(input pointer is null, etc.) 
      */
-    int   (*push)(void* instance, void *element, unsigned int element_size);    
+    int   (*push)(void* instance, const void *element, unsigned int element_size);    
     
     
     /**

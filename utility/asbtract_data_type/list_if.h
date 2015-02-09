@@ -70,7 +70,7 @@
      * @return         0: success
      *                -1: error(negative position, out of bound position, input pointer is null, etc.) 
      */
-    int   (*add)(void* instance, unsigned int position, void *element, unsigned int element_size);
+    int   (*add)(void* instance, unsigned int position, const void *element, unsigned int element_size);
     
     
     /**
